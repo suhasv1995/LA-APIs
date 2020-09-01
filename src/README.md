@@ -23,3 +23,7 @@
 ## Tables
 
 cities
+
+## Signin API
+
+# check if mobile number & email already exists or not

@@ -1,57 +1,45 @@
-const express = require("express");
-const morgan = require("morgan");
-const helmet = require("helmet");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
+// env files
 require("dotenv").config();
 
-const middlewares = require("./middlewares");
-// cities file
-const cities = require("./api/cities");
-// Middleware
+const express = require("express");
+const mongoose = require("mongoose");
+
 const app = express();
 
+// middlewares
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
 // connect to database
-mongoose.connect(
-  process.env.DATABASE_URL,
-  {
+mongoose
+  .connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  },
-  (err, client) => {
-    if (err) {
-      console.error("error mongo db connection : " + err);
-      return;
-    }
-  }
-);
-
-app.use(morgan("common"));
-app.use(helmet());
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
+    useCreateIndex: true,
   })
-);
-// body parsing middleware
-app.use(express.json());
-// Routes
-app.get("/", (req, res) => {
-  res.json({
-    message: "Hello World!",
+  .then(() => {
+    console.log("DB CONNECTED");
   });
-});
 
-app.use("/api/cities", cities);
+// Middlewares
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
 
-// Default if routes are not found
-app.use(middlewares.notFound);
-// Error handling middleware
-app.use(middlewares.errorHandler);
+// admin routes
+const adminAuthenticationRoutes = require("./routes/authenticationadmin");
+const mothercategoryRoutes = require("./routes/admin/mothercategory");
+app.use("/admin", adminAuthenticationRoutes);
+app.use("/admin/mc", mothercategoryRoutes);
 
-// Server
+// admin + api routes
+
+// api Routes
+
+// Port
 const port = process.env.PORT || 1338;
+// starting server
 app.listen(port, () => {
   console.log(`Listening to port http://localhost:${port}`);
 });
