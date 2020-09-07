@@ -30,9 +30,14 @@ app.use(cors());
 // admin routes
 const adminAuthenticationRoutes = require("./routes/authenticationadmin");
 const mothercategoryRoutes = require("./routes/admin/mothercategory");
+const categoryRoutes = require("./routes/admin/category");
+const subcategoryRoutes = require("./routes/admin/subcategory");
+const serviceRoutes = require("./routes/admin/service");
 app.use("/admin", adminAuthenticationRoutes);
 app.use("/admin/mc", mothercategoryRoutes);
-
+app.use("/admin/cat", categoryRoutes);
+app.use("/admin/subcat", subcategoryRoutes);
+app.use("/admin/service", serviceRoutes);
 // admin + api routes
 
 // api Routes

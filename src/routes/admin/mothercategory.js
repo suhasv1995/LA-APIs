@@ -12,16 +12,16 @@ const {
 router.param("id", getMCById);
 
 // insert new mothercategory
-router.post("/insertMC", insertMC);
+router.post("/", verifyToken, insertMC);
 
 // get all mothercategories
-router.get("/", getAllMC);
+router.get("/", verifyToken, getAllMC);
 
 // get single mothercategories
-router.get("/:id", getMC);
+router.get("/:id", verifyToken, getMC);
 
 // update mothercategory
-router.put("/:id", updateMC);
+router.put("/:id", verifyToken, updateMC);
 
 // delete mothercategory
 //router.delete("/:id", deleteMC);
