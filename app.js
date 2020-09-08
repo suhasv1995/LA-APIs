@@ -28,11 +28,11 @@ app.use(cookieParser());
 app.use(cors());
 
 // admin routes
-const adminAuthenticationRoutes = require("./routes/authenticationadmin");
-const mothercategoryRoutes = require("./routes/admin/mothercategory");
-const categoryRoutes = require("./routes/admin/category");
-const subcategoryRoutes = require("./routes/admin/subcategory");
-const serviceRoutes = require("./routes/admin/service");
+const adminAuthenticationRoutes = require("./src/routes/authenticationadmin");
+const mothercategoryRoutes = require("./src/routes/admin/mothercategory");
+const categoryRoutes = require("./src/routes/admin/category");
+const subcategoryRoutes = require("./src/routes/admin/subcategory");
+const serviceRoutes = require("./src/routes/admin/service");
 app.use("/admin", adminAuthenticationRoutes);
 app.use("/admin/mc", mothercategoryRoutes);
 app.use("/admin/cat", categoryRoutes);
@@ -43,7 +43,7 @@ app.use("/admin/service", serviceRoutes);
 // api Routes
 
 // Port
-const port = process.env.PORT || 1338;
+const port = process.env.PORT;
 // starting server
 app.listen(port, () => {
   console.log(`Listening to port http://localhost:${port}`);
