@@ -8,7 +8,7 @@ const app = express();
 
 // middlewares
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+//const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // connect to database
@@ -24,7 +24,7 @@ mongoose
 
 // Middlewares
 app.use(bodyParser.json());
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(cors());
 
 // admin routes
