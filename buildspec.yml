@@ -5,6 +5,8 @@ phases:
     commands:
       # Install dependencies needed for running tests
       - npm install
+      - npm install express-validator
+      - npm audit fix
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
